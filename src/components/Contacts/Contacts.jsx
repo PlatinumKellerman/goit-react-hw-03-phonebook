@@ -1,4 +1,4 @@
-import { nanoid } from 'nanoid';
+// import { nanoid } from 'nanoid';
 import s from './contacts.module.css';
 
 function Contacts({ title }) {
