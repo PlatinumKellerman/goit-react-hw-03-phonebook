@@ -1,17 +1,21 @@
 import PropTypes from 'prop-types';
+import { FcPhoneAndroid } from 'react-icons/fc';
 import s from './contacts-item.module.css';
 
-function ContactsItem({ filteredContacts, deleteContact }) {
+export function ContactsItem({ filteredContacts, onContactDelete }) {
   return filteredContacts.map(({ id, name, number }) => {
     return (
       <li className={s.contacts__item} key={id}>
-        <p className={s.contact__name}>{name}</p>
+        <p className={s.contact__name}>
+          <FcPhoneAndroid size="20" className={s.icon} />
+          {name}:
+        </p>
         <p className={s.contact__number}>{number}</p>
         <button
           className={s.contact__delete}
           id={id}
           onClick={() => {
-            deleteContact(id);
+            onContactDelete(id);
           }}
         >
           Delete
@@ -23,7 +27,5 @@ function ContactsItem({ filteredContacts, deleteContact }) {
 
 ContactsItem.propTypes = {
   filteredContacts: PropTypes.arrayOf(PropTypes.object.isRequired),
-  deleteContact: PropTypes.func.isRequired,
+  onContactDelete: PropTypes.func.isRequired,
 };
-
-export default ContactsItem;

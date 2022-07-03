@@ -1,15 +1,14 @@
 import PropTypes from 'prop-types';
-import ContactsItem from './ContactsItem/ContactsItem';
+import { ContactsItem } from './ContactsItem/index';
 import s from './contacts.module.css';
 
-function Contacts({ title, filteredContacts, deleteContact }) {
+export function Contacts({ filteredContacts, onContactDelete }) {
   return (
     <>
-      <h2 className={s.contacts__title}>{title}</h2>
       <ul className={s.contacts__list}>
         <ContactsItem
           filteredContacts={filteredContacts}
-          deleteContact={deleteContact}
+          onContactDelete={onContactDelete}
         />
       </ul>
     </>
@@ -17,9 +16,6 @@ function Contacts({ title, filteredContacts, deleteContact }) {
 }
 
 Contacts.propTypes = {
-  title: PropTypes.string.isRequired,
   filteredContacts: PropTypes.arrayOf(PropTypes.object.isRequired),
-  deleteContact: PropTypes.func.isRequired,
+  onContactDelete: PropTypes.func.isRequired,
 };
-
-export default Contacts;

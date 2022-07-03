@@ -1,9 +1,9 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
-import Container from './components/Container/Container';
-import PhonebookForm from './components/PhonebookForm/PhonebookForm';
-import Contacts from 'components/Contacts/Contacts';
-import SearchContact from './components/SearchContact/SearchContact';
+import { Container } from './components/Container/index';
+import { PhonebookForm } from './components/PhonebookForm/index';
+import { Contacts } from 'components/Contacts/index';
+import { SearchContactInput } from './components/SearchContactInput/index';
 
 export class App extends Component {
   state = {
@@ -18,14 +18,19 @@ export class App extends Component {
 
   contactHandler = data => {
     const { contacts } = this.state;
-    const contact = {
-      id: nanoid(),
-      ...data,
-    };
-    contacts.push(contact);
-    this.setState({
-      contacts,
-    });
+    const findContact = contacts.find(contact => contact.name === data.name);
+    if (findContact) {
+      alert(`${data.name} is already in contact`);
+    } else {
+      const contact = {
+        id: nanoid(),
+        ...data,
+      };
+      contacts.push(contact);
+      this.setState({
+        contacts,
+      });
+    }
   };
 
   handleSearchChange = e => {
@@ -40,7 +45,7 @@ export class App extends Component {
     });
   };
 
-  deleteContact = id => {
+  onContactDelete = id => {
     const { contacts } = this.state;
     const contactToDelete = contacts.filter(contact => {
       return contact.id !== id;
@@ -54,16 +59,18 @@ export class App extends Component {
     const { filter } = this.state;
     return (
       <Container>
-        <PhonebookForm onSubmit={this.contactHandler} />
-        <SearchContact
+        <h1>Phonebook</h1>
+        <PhonebookForm onSubmit={this.contactHandler} title="Phonebook" />
+        <SearchContactInput
           value={filter}
-          title="Find contacts by name"
+          title="Find contacts by name:"
           onChange={this.handleSearchChange}
         />
+        <h2>Contacts</h2>
         <Contacts
           title="Contacts"
           filteredContacts={this.onFilteredContacts(filter)}
-          deleteContact={this.deleteContact.bind(this)}
+          onContactDelete={this.onContactDelete.bind(this)}
         />
       </Container>
     );
