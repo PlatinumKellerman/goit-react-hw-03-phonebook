@@ -1,17 +1,18 @@
+import PropTypes from 'prop-types';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
 import s from './phonebook-form.module.css';
 
 function PhonebookForm({ onSubmit }) {
-  const schema = yup.object().shape({
-    name: yup.string().required(),
-    number: yup.string().min(6).max(16).required(),
-  });
-
   const initialValues = {
     name: '',
     number: '',
   };
+
+  const schema = yup.object().shape({
+    name: yup.string().required(),
+    number: yup.string().min(6).max(16).required(),
+  });
 
   const handleSubmit = (values, { resetForm }) => {
     onSubmit(values);
@@ -20,9 +21,9 @@ function PhonebookForm({ onSubmit }) {
 
   return (
     <>
-      <h2 className={s.form__title} title="Phonebook">
+      <h1 className={s.form__title} title="Phonebook">
         Phonebook
-      </h2>
+      </h1>
       <Formik
         initialValues={initialValues}
         validationSchema={schema}
@@ -55,5 +56,9 @@ function PhonebookForm({ onSubmit }) {
     </>
   );
 }
+
+PhonebookForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default PhonebookForm;
