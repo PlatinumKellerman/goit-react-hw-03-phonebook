@@ -4,14 +4,9 @@ import * as yup from 'yup';
 import s from './phonebook-form.module.css';
 
 export function PhonebookForm({ onSubmit }) {
-  const initialValues = {
-    name: '',
-    number: '',
-  };
-
   const schema = yup.object().shape({
-    name: yup.string().required(),
-    number: yup.string().min(6).max(20).required(),
+    name: yup.string().required('This field cannot be empty'),
+    number: yup.string().min(6).max(18).required('This field cannot be empty'),
   });
 
   const handleSubmit = (values, { resetForm }) => {
@@ -22,7 +17,7 @@ export function PhonebookForm({ onSubmit }) {
   return (
     <>
       <Formik
-        initialValues={initialValues}
+        initialValues={{ name: '', number: '' }}
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
@@ -33,10 +28,14 @@ export function PhonebookForm({ onSubmit }) {
               className={s.phonebook__input}
               name="name"
               type="text"
-              required
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             />
-            <ErrorMessage name="name" />
+            <ErrorMessage
+              name="name"
+              render={message => (
+                <span className={s.error_text}>{message}</span>
+              )}
+            />
           </label>
           <label htmlFor="number" className={s.phonebook__label}>
             Number:
@@ -44,11 +43,14 @@ export function PhonebookForm({ onSubmit }) {
               className={s.phonebook__input}
               name="number"
               type="tel"
-              pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-              required
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             />
-            <ErrorMessage name="number" />
+            <ErrorMessage
+              render={message => (
+                <span className={s.error_text}>{message}</span>
+              )}
+              name="number"
+            />
           </label>
           <button type="submit" className={s.add__button}>
             Add contact

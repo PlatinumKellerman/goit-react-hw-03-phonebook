@@ -1,4 +1,5 @@
 .submit__form {
+  width: 300px;
   display: flex;
   flex-direction: column;
   padding: 10px;
@@ -33,4 +34,8 @@
   color: aliceblue;
   cursor: pointer;
   border: 1px solid limegreen;
+}
+.error_text {
+  color: red;
+  font-size: 12px;
 }
