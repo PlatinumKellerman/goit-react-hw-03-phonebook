@@ -1,26 +1,30 @@
 import PropTypes from 'prop-types';
 import { FcPhoneAndroid } from 'react-icons/fc';
-import s from './contacts-item.module.css';
+import {
+  ListItem,
+  ItemName,
+  ItemNumber,
+  DeleteButton,
+} from './ContactsItem.styled';
 
 export function ContactsItem({ filteredContacts, onContactDelete }) {
   return filteredContacts.map(({ id, name, number }) => {
     return (
-      <li className={s.contacts__item} key={id}>
-        <p className={s.contact__name}>
-          <FcPhoneAndroid size="20" className={s.icon} />
+      <ListItem key={id}>
+        <ItemName>
+          <FcPhoneAndroid size="20" />
           {name}:
-        </p>
-        <p className={s.contact__number}>{number}</p>
-        <button
-          className={s.contact__delete}
+        </ItemName>
+        <ItemNumber>{number}</ItemNumber>
+        <DeleteButton
           id={id}
           onClick={() => {
             onContactDelete(id);
           }}
         >
           Delete
-        </button>
-      </li>
+        </DeleteButton>
+      </ListItem>
     );
   });
 }

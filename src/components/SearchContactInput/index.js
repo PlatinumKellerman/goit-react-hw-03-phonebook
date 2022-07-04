@@ -1,1 +1,0 @@
-export {SearchContactInput} from './SearchContactInput'

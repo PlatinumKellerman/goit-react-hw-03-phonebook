@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import { Container } from './components/Container/index';
 import { PhonebookForm } from './components/PhonebookForm/index';
 import { Contacts } from 'components/Contacts/index';
-import { SearchContactInput } from './components/SearchContactInput/index';
+import { Filter } from './components/Filter/index';
 
 export class App extends Component {
   state = {
@@ -61,7 +61,7 @@ export class App extends Component {
       <Container>
         <h1>Phonebook</h1>
         <PhonebookForm onSubmit={this.contactHandler} title="Phonebook" />
-        <SearchContactInput
+        <Filter
           value={filter}
           title="Find contacts by name:"
           onChange={this.handleSearchChange}

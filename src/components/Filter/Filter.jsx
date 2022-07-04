@@ -1,23 +1,22 @@
 import PropTypes from 'prop-types';
-import s from './search-contact-input.module.css';
+import { FilterLabel, FilterInput } from './Filter.styled';
 
-export function SearchContactInput({ onChange, title, value }) {
+export function Filter({ onChange, title, value }) {
   return (
-    <label htmlFor="filter" className={s.search__title}>
+    <FilterLabel htmlFor="filter">
       {title}
-      <input
-        className={s.search__input}
+      <FilterInput
         name="filter"
         type="text"
         value={value}
         onChange={onChange}
         required
       />
-    </label>
+    </FilterLabel>
   );
 }
 
-SearchContactInput.propTypes = {
+Filter.propTypes = {
   onChange: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,

@@ -1,5 +1,5 @@
-import s from './container.module.css';
+import { PhonebookContainer } from './Container.styled';
 
 export function Container(props) {
-  return <div className={s.container}>{props.children}</div>;
+  return <PhonebookContainer>{props.children}</PhonebookContainer>;
 }

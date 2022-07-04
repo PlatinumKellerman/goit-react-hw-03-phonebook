@@ -1,7 +1,13 @@
 import PropTypes from 'prop-types';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-import s from './phonebook-form.module.css';
+import {
+  MainForm,
+  PhonebookFormLabel,
+  PhonebookInput,
+  SubmitButton,
+  ErrorText,
+} from './PhonebookForm.styled';
 
 export function PhonebookForm({ onSubmit }) {
   const schema = yup.object().shape({
@@ -21,41 +27,33 @@ export function PhonebookForm({ onSubmit }) {
         validationSchema={schema}
         onSubmit={handleSubmit}
       >
-        <Form className={s.submit__form}>
-          <label htmlFor="name" className={s.phonebook__label}>
+        <MainForm>
+          <PhonebookFormLabel htmlFor="name">
             Name:
-            <Field
-              className={s.phonebook__input}
+            <PhonebookInput
               name="name"
               type="text"
               title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
             />
             <ErrorMessage
               name="name"
-              render={message => (
-                <span className={s.error_text}>{message}</span>
-              )}
+              render={message => <ErrorText>{message}</ErrorText>}
             />
-          </label>
-          <label htmlFor="number" className={s.phonebook__label}>
+          </PhonebookFormLabel>
+          <PhonebookFormLabel htmlFor="number">
             Number:
-            <Field
-              className={s.phonebook__input}
+            <PhonebookInput
               name="number"
               type="tel"
               title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             />
             <ErrorMessage
-              render={message => (
-                <span className={s.error_text}>{message}</span>
-              )}
+              render={message => <ErrorText>{message}</ErrorText>}
               name="number"
             />
-          </label>
-          <button type="submit" className={s.add__button}>
-            Add contact
-          </button>
-        </Form>
+          </PhonebookFormLabel>
+          <SubmitButton type="submit">Add contact</SubmitButton>
+        </MainForm>
       </Formik>
     </>
   );

@@ -1,16 +1,16 @@
 import PropTypes from 'prop-types';
 import { ContactsItem } from './ContactsItem/index';
-import s from './contacts.module.css';
+import { List } from './Contacts.styled';
 
 export function Contacts({ filteredContacts, onContactDelete }) {
   return (
     <>
-      <ul className={s.contacts__list}>
+      <List>
         <ContactsItem
           filteredContacts={filteredContacts}
           onContactDelete={onContactDelete}
         />
-      </ul>
+      </List>
     </>
   );
 }
