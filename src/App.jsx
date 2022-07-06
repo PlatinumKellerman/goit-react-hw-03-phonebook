@@ -35,9 +35,11 @@ export class App extends Component {
 
   onFilteredContacts = value => {
     const filterNormalize = value.toLowerCase();
-    return this.state.contacts.filter(contact => {
-      return contact.name.toLowerCase().includes(filterNormalize);
-    });
+    if (this.state.contacts) {
+      return this.state.contacts.filter(contact => {
+        return contact.name.toLowerCase().includes(filterNormalize);
+      });
+    }
   };
 
   onContactDelete = id => {
