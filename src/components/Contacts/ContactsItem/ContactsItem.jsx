@@ -8,7 +8,8 @@ import {
 } from './ContactsItem.styled';
 
 export function ContactsItem({ filteredContacts, onContactDelete }) {
-  filteredContacts = filteredContacts || [];
+  // filteredContacts = filteredContacts || [];
+  console.log(filteredContacts);
   return filteredContacts.map(({ id, name, number }) => {
     return (
       <ListItem key={id}>
