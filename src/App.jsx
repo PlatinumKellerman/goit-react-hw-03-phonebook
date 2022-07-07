@@ -7,12 +7,17 @@ import { Filter } from './components/Filter/index';
 
 export class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
     filter: '',
   };
 
   contactHandler = data => {
-    const { contacts } = this.state;
+    const contacts = [...this.state.contacts];
     const findContact = contacts.find(contact => contact.name === data.name);
     if (findContact) {
       alert(`${data.name} is already in contact`);
@@ -43,7 +48,7 @@ export class App extends Component {
   };
 
   onContactDelete = id => {
-    const { contacts } = this.state;
+    const contacts = [...this.state.contacts];
     if (contacts) {
       const contactToDelete = contacts.filter(contact => {
         return contact.id !== id;
@@ -60,7 +65,7 @@ export class App extends Component {
     this.setState({ contacts: parsedContacts });
   }
 
-  componentDidUpdate(prevState) {
+  componentDidUpdate(prevProps, prevState) {
     if (this.state.contacts !== prevState.contacts) {
       localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
     }
