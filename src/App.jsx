@@ -17,7 +17,7 @@ export class App extends Component {
   };
 
   contactHandler = data => {
-    const contacts = [...this.state.contacts];
+    const { contacts } = this.state;
     const findContact = contacts.find(contact => contact.name === data.name);
     if (findContact) {
       alert(`${data.name} is already in contact`);
@@ -26,9 +26,8 @@ export class App extends Component {
         id: nanoid(),
         ...data,
       };
-      contacts.push(contact);
       this.setState({
-        contacts,
+        contacts: [...contacts, contact],
       });
     }
   };
@@ -48,7 +47,7 @@ export class App extends Component {
   };
 
   onContactDelete = id => {
-    const contacts = [...this.state.contacts];
+    const { contacts } = this.state;
     if (contacts) {
       const contactToDelete = contacts.filter(contact => {
         return contact.id !== id;
