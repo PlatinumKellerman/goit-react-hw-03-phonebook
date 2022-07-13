@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PhonebookContainer = styled.div`
+export const Container = styled.div`
   max-width: 560px;
   padding: 20px 20px;
   margin-right: auto;
